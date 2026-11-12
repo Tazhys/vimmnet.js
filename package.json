@@ -1,0 +1,82 @@
+{
+  "name": "vimmnet.js",
+  "version": "1.0.0",
+  "description": "An unofficial TypeScript client for Vimm's Lair",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client/BaseClient.d.ts",
+      "import": "./dist/client/BaseClient.mjs",
+      "require": "./dist/client/BaseClient.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.mjs",
+      "require": "./dist/types/index.js"
+    },
+    "./vault": {
+      "types": "./dist/api/vault/index.d.ts",
+      "import": "./dist/api/vault/index.mjs",
+      "require": "./dist/api/vault/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/client/BaseClient.ts src/api/**/index.ts src/types/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts src/client/BaseClient.ts src/api/**/index.ts src/types/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest run",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write src/**/*.ts",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build && npm run type-check",
+    "release": "npm version patch && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tazhys/vimmnet.js.git"
+  },
+  "keywords": [
+    "vimm",
+    "vimms-lair",
+    "vault",
+    "typescript",
+    "api-client",
+    "games"
+  ],
+  "author": "Tazhys",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tazhys/vimmnet.js/issues"
+  },
+  "homepage": "https://github.com/Tazhys/vimmnet.js#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "rimraf": "^6.1.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^1.0.0"
+  }
+}
